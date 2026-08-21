@@ -39,7 +39,7 @@ class EventRouter:
             reverse=True,
         )
         for pattern, target in wildcard_routes:
-            prefix = pattern.removesuffix(".*")
+            prefix = pattern.removesuffix("*")
             if normalized_event.startswith(prefix):
                 return target
 
