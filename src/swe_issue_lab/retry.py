@@ -16,5 +16,5 @@ def calculate_retry_delay(
     if cap_seconds < base_seconds:
         raise ValueError("cap_seconds must be at least base_seconds")
 
-    delay = base_seconds * (2.0**attempt)
+    delay = base_seconds * (2.0 ** (attempt - 1))
     return float(min(cap_seconds, delay))

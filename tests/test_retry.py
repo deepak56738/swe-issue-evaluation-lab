@@ -14,6 +14,17 @@ def test_delay_increases_between_early_attempts() -> None:
     assert second > first
 
 
+@pytest.mark.parametrize(
+    ("attempt", "expected"),
+    [(1, 2.0), (2, 4.0), (3, 8.0), (4, 16.0)],
+)
+def test_first_attempt_starts_at_configured_base(
+    attempt: int,
+    expected: float,
+) -> None:
+    assert calculate_retry_delay(attempt, base_seconds=2) == expected
+
+
 @pytest.mark.parametrize("attempt", [0, -1])
 def test_rejects_attempt_below_one(attempt: int) -> None:
     with pytest.raises(ValueError, match="at least 1"):
