@@ -14,12 +14,29 @@ The target package contains webhook reliability utilities for signature
 verification, retry scheduling, and event routing. Each evaluation case follows
 the same issue-to-fix contract used in day-to-day repository maintenance.
 
+## Highlights
+
+- Three closed defect reports with focused regression tests
+- Separate reviewed pull request for every issue
+- 38 deterministic evaluation cases with 100% branch coverage
+- JSON and JUnit report generation from a single command
+- Ruff, strict mypy, and Python 3.11–3.13 test matrix
+- Non-root Docker image that executes the complete evaluation suite
+
 ## Evaluation workflow
 
 ```text
 Issue report → reproduce with a focused test → implement the fix
     → run quality gates → review the patch → close the issue
 ```
+
+## Completed cases
+
+| Issue | Regression evidence | Fix |
+| --- | --- | --- |
+| [Malformed signature headers](https://github.com/deepak56738/swe-issue-evaluation-lab/issues/1) | Invalid headers now return `False` instead of raising | [PR #7](https://github.com/deepak56738/swe-issue-evaluation-lab/pull/7) |
+| [Retry base-delay off-by-one](https://github.com/deepak56738/swe-issue-evaluation-lab/issues/2) | Attempts one through four verify the documented sequence | [PR #8](https://github.com/deepak56738/swe-issue-evaluation-lab/pull/8) |
+| [Wildcard namespace leakage](https://github.com/deepak56738/swe-issue-evaluation-lab/issues/4) | Neighboring event names are rejected at the delimiter boundary | [PR #9](https://github.com/deepak56738/swe-issue-evaluation-lab/pull/9) |
 
 ## Run the evaluation
 
