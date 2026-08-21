@@ -35,6 +35,18 @@ def test_unknown_event_raises_clear_error() -> None:
 
 
 @pytest.mark.parametrize(
+    "event_type",
+    ["orders", "orderly.created", "orders_archive.created", "orders-v2.created"],
+)
+def test_wildcard_respects_event_namespace_boundary(event_type: str) -> None:
+    router = EventRouter()
+    router.add("orders.*", "order-handler")
+
+    with pytest.raises(RouteNotFoundError):
+        router.resolve(event_type)
+
+
+@pytest.mark.parametrize(
     ("pattern", "target", "message"),
     [
         ("", "handler", "pattern"),
